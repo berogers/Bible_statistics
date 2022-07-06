@@ -1,0 +1,33 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 Courier-Bold;\f1\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f0\b\fs24 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 TAKE (first ten rows of) KJV, first col (Book name), replace newline delimiter with comma, export to CSV (creates a row w/ n_columns = n_verses) in CSV - will need to transpose later)\
+
+\f1\b0 head KJV.txt | awk '\{print $1\}' | tr "\\n" "," > col1.csv\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f0\b \cf2 \outl0\strokewidth0 For real KJV \'91Book Name\'92 strings TXT export (31,101 verses is more columns than Excel workbooks allow: hence TXT save)
+\f1\b0 \outl0\strokewidth0 \
+\pard\pardeftab720\sa240\partightenfactor0
+\cf2 \outl0\strokewidth0 cat KJV.txt | awk '\{print $1\}' | tr "\\n" "," > kjv_book_names.txt\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f0\b \cf2 For real KJV \'91Chapter:Verse\'92 strings TXT export
+\f1\b0 \
+cat KJV.txt | awk '\{print $2\}\'92 | tr "\\n" "," > kjv_chap_verse_nums.txt\
+
+\f0\b For real KJV \'91All verse text\'92 strings CSV export\
+(syntax: print all but the first two columns)\
+
+\f1\b0 cat KJV.txt | \outl0\strokewidth0 \strokec2 awk '\{$1=$2=""; print $0\}'\outl0\strokewidth0  | tr "\\n" "," > kjv_verse_text.csv\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf2 \outl0\strokewidth0 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+}
